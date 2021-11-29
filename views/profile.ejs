@@ -11,20 +11,24 @@
       
     <%- include("includes/navigation.ejs") %>
   
+  <!-- general profile not limited to student -> common things will be displayed -->
+  <!-- more info will be taken if necessary but will not be shown in the profile unless they tend to update the profile -->
   <div class="student-profile">
       <div class="container">
         <div class="row">
           <div class="col-lg-4">
             <div class="card shadow-sm">
               <div class="card-header bg-transparent text-center">
-                <img class="profile_img" src="imgs/profile.jpg" alt="student dp">
+                <img class="profile_img" src="imgs/profile.jpg" alt="profile-image">
                 <h3>Sai Vivek Kadali</h3>
               </div>
               <div class="card-body">
-                  <p class="mb-0"><strong class="pr-1">Roll Number :</strong>197139</p>
-                  <p class="mb-0"><strong class="pr-1">Year :</strong>3rd year</p>
-                  <p class="mb-0"><strong class="pr-1">Branch :</strong>CSE</p>      
-                  <p class="mb-0"><strong class="pr-1">Section :</strong>A</p> 
+                  <!-- this ID is private information, and only displayed when the requested user is actually him/her-self -->
+                  <!-- will be using if condition to cross check with the session created -->
+                  <p class="mb-0"><strong class="pr-1">ID :</strong>abcd-efgh-ijkl</p>
+                  <p class="mb-0"><strong class="pr-1">Working Status: </strong>Student</p>
+                  <p class="mb-0"><strong class="pr-1">Avg. Rating: </strong>3.6/5</p>
+                  <p class="mb-0"><strong class="pr-1">Contact Info: </strong>Private</p>
               </div>
             </div>
           </div>
