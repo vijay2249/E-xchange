@@ -1,11 +1,26 @@
 const express=require('express');
 const bodyParser = require('body-parser')
 const _ = require('lodash')
+// const session = require('express-session')
+// const passport = require('passport')
 
 const app = express();
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}))
+
+const d = new Date()
+const month = d.getMonth + 1 > 12 ? 1: d.getMonth +1
+
+// app.use(session({
+//     cookie: {
+//         path: "/",
+//         secure: true,
+//         maxAge: new Date(d.getFullYear, month),
+//         secure: true
+//     },
+//     secret: "UnknownWork",
+// }))
 
 const categorys=[
     {"title":"Cycle","img_add":"imgs/1.jpg", "category":"Cycle"},
