@@ -88,17 +88,17 @@ app.get("/purchase", (req, res, next) =>{
 
 // app.use('/purchase', purchaseItemsRoute)
 
-app.use('/sell', sellItemsRoute)
+// app.use('/sell', sellItemsRoute)
 
-// app.get('/sell', (req, res, next)=>{
-//     res.render('sellItem', { path: "/sell"})
-// })
+app.get('/sell', (req, res, next)=>{
+    res.render('sellItem', { path: "/sell"})
+})
 
-// app.post("/sell", (req, res, next)=>{
-//     const {category} = req.body
-//     categoryItems.push(req.body)
-//     res.redirect(`/category/${category}`)
-// })
+app.post("/sell", (req, res, next)=>{
+    const {category} = req.body
+    categoryItems.push(req.body)
+    res.redirect(`/category/${category}`)
+})
 
 app.use('/profile', userProfileRoute)
 

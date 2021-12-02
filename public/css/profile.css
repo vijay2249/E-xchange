@@ -182,3 +182,7 @@ h1 {
 .submenu > a > li:active {
     background: var(--white-color);
 }
+
+.content p{
+    line-height: 1.8rem;
+}
