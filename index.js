@@ -1,12 +1,3 @@
-const express=require('express');
-const bodyParser = require('body-parser')
-const _ = require('lodash')
-
-const userProfileRoute = require('./routes/userProfile')
-const sellItemsRoute = require('./routes/sell')
-const purchaseItemsRoute = require('./routes/purchase')
-// const aboutUsRoute = require('./routes/aboutUs')
-
 const categorys=[
     {"title":"Cycle","img_path":"imgs/1.jpg", "category":"Cycle","url":"/category/cycle"},
     {"title":"Books","img_path":"imgs/2.jpg", "category":"Books","url":"/category/books"},
@@ -68,6 +59,15 @@ const categoryItems = [
     description: 'Nice Look'}
 ]
 
+const express=require('express');
+const bodyParser = require('body-parser')
+const _ = require('lodash')
+
+const userProfileRoute = require('./routes/userProfile')
+const sellItemsRoute = require('./routes/sell')
+const purchaseItemsRoute = require('./routes/purchase')
+// const aboutUsRoute = require('./routes/aboutUs')
+
 const app = express();
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
@@ -82,23 +82,23 @@ app.get("/about", (req, res, next) =>{
     res.render('aboutUs/aboutUs', {path: '/about'})
 })
 
-app.get("/purchase", (req, res, next) =>{
-    res.render("purchase",{Categories:categorys, path: "/purchase"});
-})
+// app.get("/purchase", (req, res, next) =>{
+//     res.render("purchase",{Categories:categorys, path: "/purchase"});
+// })
 
-// app.use('/purchase', purchaseItemsRoute)
+app.use('/purchase', purchaseItemsRoute)
 
-// app.use('/sell', sellItemsRoute)
+app.use('/sell', sellItemsRoute)
 
-app.get('/sell', (req, res, next)=>{
-    res.render('sellItem', { path: "/sell"})
-})
-
-app.post("/sell", (req, res, next)=>{
-    const {category} = req.body
-    categoryItems.push(req.body)
-    res.redirect(`/category/${category}`)
-})
+// app.route('/sell')
+//     .get((req, res, next) =>{
+//         res.render('sellItem', {path: '/sell'})
+//     })
+//     .post((req, res, next)=>{
+//         const {category} = req.body
+//         categoryItems.push(req.body)
+//         res.redirect(`/category/${category}`)
+//     })
 
 app.use('/profile', userProfileRoute)
 

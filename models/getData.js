@@ -12,6 +12,13 @@ const getDataFromFile = (callBack, fileName) =>{
   })
 }
 
+const getAllCategories = (callBack) =>{
+  fs.readFile(categories, (err, content)=>{
+    if(err) callBack([])
+    else callBack(JSON.parse(content))
+  })
+}
+
 module.exports = class Product{
   constructor(item){
     this.item = item
@@ -32,7 +39,7 @@ module.exports = class Product{
 module.exports = class Categories{
   constructor(item){this.item = item}
   save(){
-    getAllCategories((category, categories) =>{
+    getAllCategories((category) =>{
       category.push(this.item)
       fs.write(categories, JSON.stringify(category), (err) =>{
         console.log(err);
@@ -40,6 +47,6 @@ module.exports = class Categories{
     })
   }
   static fetchAllCategories(callBack){
-    getAllCategories(callBack, categories)
+    getAllCategories(callBack)
   }
 }
