@@ -1,7 +1,6 @@
 const fs = require('fs')
 const path = require('path')
 
-// const filePath = path.join(path.dirname(require.main.filename), "data", 'data.json')
 const categories = path.join(path.dirname(require.main.filename), "data", 'categories.json')
 const categoryItems = path.join(path.dirname(require.main.filename), "data", 'categoryItem.json')
 

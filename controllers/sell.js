@@ -8,8 +8,6 @@ exports.postItemData = (req, res, next)=>{
   const item = req.body
   console.log(item);
   const newItem = new Categories(item)
-  // const {category, owner, price, condition, description} = req.body
   newItem.save()
-  // categoryItems.push(req.body)
   res.redirect(`/category/${req.body.category}`)
 }

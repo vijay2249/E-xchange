@@ -59,7 +59,6 @@ const _ = require('lodash')
 const userProfileRoute = require('./routes/userProfile')
 const sellItemsRoute = require('./routes/sell')
 const purchaseItemsRoute = require('./routes/purchase')
-// const aboutUsRoute = require('./routes/aboutUs')
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -88,8 +87,6 @@ app.get("/about", (req, res, next) =>{
 })
 
 app.use('/purchase', purchaseItemsRoute)
-
-// app.use('/sell', sellItemsRoute)
 
 app.route('/sell')
     .get((req, res, next) =>{
