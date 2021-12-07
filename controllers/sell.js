@@ -1,4 +1,4 @@
-const allItems = require('../models/getData')
+const Categories = require('../models/getData')
 
 exports.getItemData = (req, res, next) =>{
   res.render('sellItem', {path: '/sell'})
@@ -7,7 +7,7 @@ exports.getItemData = (req, res, next) =>{
 exports.postItemData = (req, res, next)=>{
   const item = req.body
   console.log(item);
-  const newItem = new allItems(item)
+  const newItem = new Categories(item)
   // const {category, owner, price, condition, description} = req.body
   newItem.save()
   // categoryItems.push(req.body)

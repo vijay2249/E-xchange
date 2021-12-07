@@ -3,7 +3,7 @@ const path = require('path')
 
 // const filePath = path.join(path.dirname(require.main.filename), "data", 'data.json')
 const categories = path.join(path.dirname(require.main.filename), "data", 'categories.json')
-const categoryItems = path.join(path.dirname(require.main.filename), "data", 'categoryItems.json')
+const categoryItems = path.join(path.dirname(require.main.filename), "data", 'categoryItem.json')
 
 const getDataFromFile = (callBack, fileName) =>{
   fs.readFile(fileName, (err, content)=>{
@@ -26,8 +26,12 @@ module.exports = class Product{
   save(){
     getDataFromFile((products, categoryItems) =>{
       products.push(this.item)
-      fs.writeFile(categoryItems, JSON.stringify(products), (err)=>{
-        console.log(err);
+      fs.writeFile(categoryItems, JSON.stringify(products), (err, fd)=>{
+        if(err) console.log(err);
+        fs.close(fd, (e)=>{
+          if(e) console.log(e);
+          else console.log("No error while closing the file");
+        })
       })
     })
   }
@@ -41,8 +45,12 @@ module.exports = class Categories{
   save(){
     getAllCategories((category) =>{
       category.push(this.item)
-      fs.write(categories, JSON.stringify(category), (err) =>{
-        console.log(err);
+      fs.write(categories, JSON.stringify(category), (err, fd) =>{
+        if(err) console.log(err);
+        fs.close(fd, (e) =>{
+          if(e) console.log(err);
+          else console.log("No error while closing the file");
+        })
       })
     })
   }

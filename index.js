@@ -1,12 +1,3 @@
-const categorys=[
-    {"title":"Cycle","img_path":"imgs/1.jpg", "category":"Cycle","url":"/category/cycle"},
-    {"title":"Books","img_path":"imgs/2.jpg", "category":"Books","url":"/category/books"},
-    {"title":"Calculator","img_path":"imgs/5.jpg", "category":"Calculator","url":"/category/calculator"},
-    {"title":"Stationary","img_path":"imgs/6.jpg", "category":"Stationary","url":"/category/stationary"},
-    {"title":"Drafter","img_path":"imgs/3.jpg", "category":"Drafter","url":"/category/drafter"},
-    {"title":"Chart-Holder","img_path":"imgs/4.jpg", "category":"Chart-Holder","url":"/category/chart_holder"}
-];
-
 const categoryItems = [
     {category: 'cycle', price: 500, condition: 'usable',img_path:"/imgs/cycles/1.jpg",owner: 'Vijay',
      description: 'Working well but front break need to be tightned'},
@@ -82,23 +73,19 @@ app.get("/about", (req, res, next) =>{
     res.render('aboutUs/aboutUs', {path: '/about'})
 })
 
-// app.get("/purchase", (req, res, next) =>{
-//     res.render("purchase",{Categories:categorys, path: "/purchase"});
-// })
-
 app.use('/purchase', purchaseItemsRoute)
 
-app.use('/sell', sellItemsRoute)
+// app.use('/sell', sellItemsRoute)
 
-// app.route('/sell')
-//     .get((req, res, next) =>{
-//         res.render('sellItem', {path: '/sell'})
-//     })
-//     .post((req, res, next)=>{
-//         const {category} = req.body
-//         categoryItems.push(req.body)
-//         res.redirect(`/category/${category}`)
-//     })
+app.route('/sell')
+    .get((req, res, next) =>{
+        res.render('sellItem', {path: '/sell'})
+    })
+    .post((req, res, next)=>{
+        const {category} = req.body
+        categoryItems.push(req.body)
+        res.redirect(`/category/${category}`)
+    })
 
 app.use('/profile', userProfileRoute)
 
