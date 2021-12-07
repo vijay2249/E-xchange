@@ -1,8 +1,65 @@
+const categoryItems = [
+    {category: 'cycle', price: 500, condition: 'usable',img_path:"/imgs/cycles/1.jpg",owner: 'Vijay',
+     description: 'Working well but front break need to be tightned'},
+    {category: 'cycle', price: 600, condition: 'usable',img_path:"/imgs/cycles/4.jpg",owner: 'Vamsi',
+    description: 'Working well but front break need to be tightned'}, 
+    {category: 'cycle', price: 400, condition: 'super',img_path:"/imgs/cycles/5.jpg",owner: 'Jaithra',
+     description: 'Working well but front break need to be tightned'},
+    {category: 'cycle', price: 400, condition: 'super',img_path:"/imgs/cycles/2.jpg",owner: 'Jaithra',
+    description: 'Working well but front break need to be tightned'},
+
+    {category: 'books', price: 1200,condition: 'usable',img_path:"/imgs/books/5.jpg",owner: 'Sai Vivek',
+    description: 'some pages missing'},
+    {category: 'books', price: 650,condition: 'usable',img_path:"/imgs/books/1.jpg",owner: 'Jaithra',
+     description: 'some pages missing'},
+     {category: 'books', price: 300,condition: 'usable',img_path:"/imgs/books/2.jpg",owner: 'Vijay',
+     description: 'some pages missing'},
+     {category: 'books', price: 250,condition: 'usable',img_path:"/imgs/books/3.jpg",owner: 'Vivek',
+     description: 'some pages missing'},
+     {category: 'books', price: 700,condition: 'usable',img_path:"/imgs/books/4.jpg",owner: 'Vamsi',
+     description: 'some pages missing'},
+
+    {category: 'Stationary',price: 120,img_path:"/imgs/stationary/1.jpg",condition: 'Not so good',owner: 'Vamsi',
+    description: 'Some leafs are torn'}, 
+    {category: 'Stationary',price: 50,img_path:"/imgs/stationary/2.jpg",condition: 'Good',owner: 'Vijay',
+    description: 'Some brushes are lost in set'}, 
+    {category: 'Stationary',price: 70,img_path:"/imgs/stationary/3.jpg",condition: 'Not so good',owner: 'Jaithra',
+    description: 'Some colors are dried'}, 
+    {category: 'Stationary',price: 200,img_path:"/imgs/stationary/4.jpg",condition: 'Excellent',owner: 'Vivek',
+    description: 'Parker pen'},
+
+    {category: 'Calculator', price: 450,img_path:"/imgs/calculator/1.jpg",condition: 'Good',owner: 'Sai Vivek',
+    description: 'Working well'},
+    {category: 'Calculator', price: 700,img_path:"/imgs/calculator/2.jpg",condition: 'Ok',owner: 'Vamsi',
+    description: 'Working well'},
+    {category: 'Calculator', price: 1000,img_path:"/imgs/calculator/3.jpg",condition: 'Excellent',owner: 'Jaithra',
+    description: 'Working very well'},
+    
+    {category: 'drafter', price: 45,img_path:"/imgs/drafter/1.jpg",condition: 'Good',owner: 'Sai Vivek',
+    description: 'Working well'},
+    {category: 'drafter', price: 70,img_path:"/imgs/drafter/2.jpg",condition: 'Ok',owner: 'Vamsi',
+    description: 'Working well'},
+    {category: 'drafter', price: 100,img_path:"/imgs/drafter/3.jpg",condition: 'Excellent',owner: 'Vijay',
+    description: 'Working very well'},
+
+    {category: 'Chart-Holder', price: 120,img_path:"/imgs/ChartHolder/1.jpg",condition: 'No Damage',owner: 'Vijay',
+    description: 'Works very well'},
+    {category: 'Chart-Holder', price: 120,img_path:"/imgs/ChartHolder/2.jpg",condition: 'Pretty good',owner: 'Jaithra',
+    description: 'Holds more than 10 charts'},
+    {category: 'Chart-Holder', price: 120,img_path:"/imgs/ChartHolder/3.jpg",condition: 'No Damage',owner: 'Vamsi',
+    description: 'Nice Look'}
+]
+
 const express=require('express');
 const bodyParser = require('body-parser')
 const _ = require('lodash')
 // const session = require('express-session')
 // const passport = require('passport')
+
+const userProfileRoute = require('./routes/userProfile')
+const sellItemsRoute = require('./routes/sell')
+const purchaseItemsRoute = require('./routes/purchase')
+// const aboutUsRoute = require('./routes/aboutUs')
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -22,84 +79,29 @@ const month = d.getMonth + 1 > 12 ? 1: d.getMonth +1
 //     secret: "UnknownWork",
 // }))
 
-const categorys=[
-    {"title":"Cycle","img_add":"imgs/1.jpg", "category":"Cycle"},
-    {"title":"Books","img_add":"imgs/2.jpg", "category":"Books"},
-    {"title":"Calculator","img_add":"imgs/5.jpg", "category":"Calculator"},
-    {"title":"Stationary","img_add":"imgs/6.jpg", "category":"Stationary"},
-    {"title":"Drafter","img_add":"imgs/3.jpg", "category":"Drafter"},
-    {"title":"Chart-Holder","img_add":"imgs/4.jpg", "category":"Chart-Holder"}
-];
-
-const categoryItems = [
-    {
-        category: 'cycle', 
-        price: 500, 
-        condition: 'usable',
-        img_add:"imgs/1.jpg",
-        owner: 'Viz',
-        description: 'Working well but front break need to be tightned'
-    },
-    {
-        category: 'books', 
-        price: 500,
-        condition: 'usable',
-        img_add:"imgs/2.jpg",
-        owner: 'Vivek',
-        description: 'some pages missing'
-    },
-    {
-        category: 'Drafter', 
-        price: 50,
-        img_add:"imgs/3.jpg",
-        condition: 'not so good',
-        owner: 'Jaithra',
-        description: 'Working well but need to be tightned'
-    },
-    {
-        category: 'cycle', 
-        price: 500, 
-        condition: 'usable',
-        img_add:"imgs/1.jpg",
-        owner: 'Viz',
-        description: 'Working well but front break need to be tightned'
-    },
-    {
-        category: 'Stationary',
-        price: 5,
-        img_add:"imgs/6.jpg",
-        condition: 'Not so good',
-        owner: 'Vamsi',
-        description: 'Working well but front break need to be tightned'
-    },
-]
-
 app.get("/", (req, res, next) => {
-    res.render("profile", {path: "/profile"});
+    res.render('aboutUs/aboutUs', {path: '/about'})
 })
 
-app.get("/purchase", (req, res, next) =>{
-    res.render("purchase",{Categories:categorys, path: "/purchase"});
+app.get("/about", (req, res, next) =>{
+    res.render('aboutUs/aboutUs', {path: '/about'})
 })
 
-app.get('/sell', (req, res, next)=>{
-    res.render('sellItem', { path: "/sell"})
-})
+app.use('/purchase', purchaseItemsRoute)
 
-app.post("/sell", (req, res, next)=>{
-    const {category, owner, price, condition, branch_year, description} = req.body
-    // console.log(category, owner, price, condition, branch_year, description);
-    categoryItems.push(req.body)
-    console.log(categoryItems);
-    // console.log(req.body);
-    res.redirect(`/category/${category}`)
-    // need to redirect to sold items page at last  -----> final goal
-    // right now the data is added to the var and redirected to purchase page  ---> current working method to continue other work
-})
+// app.use('/sell', sellItemsRoute)
 
-app.get('/profile', (req, res, next)=>{
-    res.render('profile', { path: "/profile"})
-})
+app.route('/sell')
+    .get((req, res, next) =>{
+        res.render('sellItem', {path: '/sell'})
+    })
+    .post((req, res, next)=>{
+        const {category} = req.body
+        categoryItems.push(req.body)
+        res.redirect(`/category/${category}`)
+    })
+
+app.use('/profile', userProfileRoute)
 
 app.get('/category/:categoryName', (req, res, next)=>{
     const categoryName = _.lowerCase(req.params.categoryName)
@@ -111,9 +113,7 @@ app.get('/category/:categoryName', (req, res, next)=>{
 })
 
 app.get('/cart', (req, res, next) =>{
-    console.log("This is your cart");
+    res.render('cart', { path: "/cart"})
 })
 
-app.listen(3000,function(){
-    console.log("Server Started and listening on 3000");
-})
+app.listen(3000,() =>{ console.log("Server Started and listening on 3000") })
